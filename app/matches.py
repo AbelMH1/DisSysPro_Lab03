@@ -7,7 +7,7 @@ from domain import visit
 factory = object_factory.ObjectFactory()
 factory.register_builder('X01', x01_match.X01MatchBuilder())
 
-x01 = factory.create('X01')
+x01 = factory.create('X01', starting_total=301)
 match = darts_match.DartsMatch()
 
 player1_index = match.register_player('Alice')
