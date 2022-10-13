@@ -27,6 +27,7 @@ class DartServer(DartsMatchServicer):
         my_visit = visit.Visit(request.visit)
         match = self.registry.get_match(request.matchId)
         result, response = match.process_visit(request.playerIndex, my_visit)
+        self.WhatIsLeft(request, context)
         return VisitResponse(result=result, message=response)
 
     def RegisterPlayer(self, request, context):
@@ -99,6 +100,12 @@ class DartServer(DartsMatchServicer):
                                             score=0)
                 v = y - 1
             time.sleep(1)
+
+    def WhatIsLeft(self, request, context):  # Extra exercice 2 from Lab03
+        match = self.registry.get_match(request.matchId)
+        remaining_score = match.scores[request.playerIndex]
+        name = match.match.players[request.playerIndex]
+        print("The remaining score for " + str(name) + " is: " + str(remaining_score))
 
 
 def serve():
